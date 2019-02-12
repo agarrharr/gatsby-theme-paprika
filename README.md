@@ -17,6 +17,18 @@ PAPRIKA_PASSWORD=somethingsecure
 node scripts/import-recipes.js
 ```
 
+## Develop
+
+```
+npm run develop
+```
+
+### Build
+
+```
+npm run build
+```
+
 ## License
 
 MIT
