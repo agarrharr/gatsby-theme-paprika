@@ -12,6 +12,8 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "dependencies": {
+    "dotenv": "^6.2.0",
+    "export-paprika-recipes": "^1.0.0",
     "gatsby": "^2.0.119",
     "react": "^16.8.1",
     "react-dom": "^16.8.1"
