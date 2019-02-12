@@ -29,6 +29,10 @@ npm run develop
 npm run build
 ```
 
+### Related
+
+- [export-paprika-recipes](https://github.com/agarrharr/export-paprika-recipes)
+
 ## License
 
 MIT
