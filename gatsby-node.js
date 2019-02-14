@@ -36,7 +36,6 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     `).then(result => {
-      console.log(result.data.allRecipesJson);
       result.data.allRecipesJson.edges.forEach(({ node }) => {
         createPage({
           path: node.fields.slug,
