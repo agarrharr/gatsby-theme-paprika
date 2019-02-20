@@ -46,6 +46,15 @@ PAPRIKA_USERNAME=my-email@email.com
 PAPRIKA_PASSWORD=somethingsecure
 ```
 
+Add a `.gitignore` file:
+
+```
+.env
+node_modules
+.cache
+public
+```
+
 Import Recipes from Paprika
 
 ```
