@@ -2,6 +2,8 @@
 
 A [Gatsby](https://www.gatsbyjs.org/) theme that pulls in your data from Paprika and displays your recipes.
 
+[Demo](http://adam.garrett-harris.com/my-recipes/)
+
 ## Using
 
 Create a new directory and install `gatsby`, `react`, `react-dom`, and `gatsby-theme-paprika`.
