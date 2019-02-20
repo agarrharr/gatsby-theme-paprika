@@ -1,8 +1,13 @@
 {
   "name": "gatsby-theme-paprika",
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "A Gatsby theme that pulls in recipes from Paprika",
   "version": "0.1.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agarrharr/gatsby-theme-paprika.git"
+  },
+  "main": "index.js",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -14,21 +19,16 @@
     "dotenv": "^6.2.0",
     "export-paprika-recipes": "^1.0.0",
     "gatsby": "^2.0.119",
+    "gatsby-plugin-page-creator": "^2.0.7",
     "gatsby-source-filesystem": "^2.0.20",
     "gatsby-transformer-json": "^2.1.8",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "slug": "^0.9.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-hello-world.git"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-hello-world#readme",
-  "main": "gatsby-config.js",
-  "devDependencies": {},
-  "author": ""
+  "peerDependencies": {
+    "gatsby": "^2.0.119",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1"
+  }
 }

@@ -39,7 +39,7 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allRecipesJson.edges.forEach(({ node }) => {
         createPage({
           path: node.fields.slug,
-          component: path.resolve(`./src/templates/recipe.js`),
+          component: require.resolve(`./src/templates/recipe.js`),
           context: {
             // Data passed to context is available in page queries as GraphQL variables.
             id: node.id,
