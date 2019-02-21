@@ -22,11 +22,14 @@ export default ({ data }) => {
         <p itemProp="aggregateRating" className="rating" value={recipe.rating}>
           {'★'.repeat(recipe.rating)}
         </p>
-        {false && (
-          <p itemProp="recipeCategory" className="categories">
-            {recipe.categories.join(', ')}
-          </p>
-        )}
+        <p itemProp="recipeCategory" className="categories">
+          {recipe.categories.map((category, i) => (
+            <span key={category.uid}>
+              {category.name}
+              {i !== recipe.categories.length - 1 ? ', ' : null}
+            </span>
+          ))}
+        </p>
         <p className="metadata">
           <b>Source: </b>
           <a itemProp="url" href={recipe.source_url}>
@@ -81,7 +84,10 @@ export const query = graphql`
       difficulty
       in_trash
       directions
-      categories
+      categories {
+        uid
+        name
+      }
       photo_url
       cook_time
       name

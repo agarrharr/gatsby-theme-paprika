@@ -13,7 +13,6 @@ if (!fs.existsSync(photoDir)) {
   fs.mkdirSync(photoDir);
 }
 
-console.log(photoDir);
 paprika.saveRecipes(
   process.env.PAPRIKA_USERNAME,
   process.env.PAPRIKA_PASSWORD,
