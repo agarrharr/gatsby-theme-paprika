@@ -1,10 +1,17 @@
 module.exports = {
   plugins: [
-    `gatsby-transformer-json`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `./data/`,
+        name: `data`,
+        path: `./data/recipes.json`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `photos`,
+        path: `./data/photos/`,
       },
     },
     {
@@ -13,5 +20,7 @@ module.exports = {
         path: `${__dirname}/src/pages`,
       },
     },
+    `gatsby-transformer-json`,
+    `gatsby-transformer-sharp`,
   ],
 };

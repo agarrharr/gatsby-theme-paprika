@@ -1,20 +1,18 @@
 import React from 'react';
-// import styled from 'react-emotion';
-// import { graphql } from 'gatsby';
+import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 
 export default ({ data }) => {
   const recipe = data.recipesJson;
+  const recipeImage = data.recipeImage;
 
   return (
     <div className="recipe" itemScope="" itemType="http://schema.org/Recipe">
       <div className="infobox">
         <div className="photobox">
-          <img
-            src={recipe.photo_url}
-            itemProp="image"
-            className="photo photoswipe"
-            alt={recipe.name}
-          />
+          {recipeImage && (
+            <Img fixed={recipeImage.childImageSharp.fixed} alt={recipe.name} />
+          )}
         </div>
         <h1 itemProp="name" className="name">
           {recipe.name}
@@ -65,7 +63,7 @@ export default ({ data }) => {
 };
 
 export const query = graphql`
-  query RecipeQuery($id: String!) {
+  query RecipeQuery($id: String!, $imagePath: String!) {
     recipesJson(id: { eq: $id }) {
       id
       rating
@@ -100,6 +98,13 @@ export const query = graphql`
       nutritional_info
       fields {
         slug
+      }
+    }
+    recipeImage: file(relativePath: { eq: $imagePath }) {
+      childImageSharp {
+        fixed(width: 280, height: 280) {
+          ...GatsbyImageSharpFixed
+        }
       }
     }
   }
