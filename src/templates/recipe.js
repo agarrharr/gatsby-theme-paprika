@@ -138,15 +138,7 @@ class Recipe extends React.Component {
     this.setState(state => ({
       ...state,
       completedIngredients: this.state.completedIngredients.includes(i)
-        ? [
-            ...this.state.completedIngredients.splice(
-              0,
-              this.state.completedIngredients.indexOf(i)
-            ),
-            ...this.state.completedIngredients.splice(
-              this.state.completedIngredients.indexOf(i + 1)
-            ),
-          ]
+        ? this.state.completedIngredients.filter(ingredient => ingredient !== i)
         : [...this.state.completedIngredients, i],
     }));
   };
