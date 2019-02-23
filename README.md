@@ -2,7 +2,7 @@
 
 A [Gatsby](https://www.gatsbyjs.org/) theme that pulls in your data from Paprika and displays your recipes.
 
-[Demo](http://adam.garrett-harris.com/my-recipes/)
+[Demo](http://adam.garrett-harris.com/recipes/)
 
 ## Using
 
@@ -96,7 +96,7 @@ npm run deploy
 ### Related
 
 - [export-paprika-recipes](https://github.com/agarrharr/export-paprika-recipes)
-- [my-recipes](https://github.com/agarrharr/my-recipes)
+- [recipes](https://github.com/agarrharr/recipes)
 
 ## License
 
