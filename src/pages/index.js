@@ -18,7 +18,7 @@ const RecipeRow = styled.div`
   display: flex;
   height: 70px;
   padding: 5px 0;
-  border-bottom: 1px solid ${COLORS.grey};
+  border-bottom: 1px solid ${COLORS.GREY};
 `;
 
 const RecipeDetails = styled.div`
@@ -29,7 +29,7 @@ const RecipeDetails = styled.div`
 `;
 
 const RecipeSource = styled.small`
-  color: ${COLORS.grey};
+  color: ${COLORS.GREY};
   font-weight: lighter;
 `;
 
@@ -46,7 +46,7 @@ export default ({ data }) => {
     <div>
       <RecipesContainer>
         {data.allRecipesJson.edges.map(({ node }) => (
-          <Link key={node.uid} to={node.fields.slug}>
+          <Link key={node.uid} to={`/${node.fields.slug}`}>
             <RecipeRow>
               {images[node.uid].childImageSharp && (
                 <Img
