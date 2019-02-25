@@ -1,16 +1,13 @@
 {
   "name": "gatsby-theme-paprika",
   "description": "A Gatsby theme that pulls in recipes from Paprika",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/agarrharr/gatsby-theme-paprika.git"
   },
   "main": "index.js",
-  "engines": {
-    "node": ">=10.9.0"
-  },
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -22,7 +19,7 @@
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
     "dotenv": "^6.2.0",
-    "export-paprika-recipes": "^1.0.1",
+    "export-aprika-recipes": "^1.0.3",
     "gatsby": "^2.0.119",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-emotion": "^4.0.4",
