@@ -1,11 +1,6 @@
 const path = require(`path`);
 const slug = require(`slug`);
 const urlify = a => a.replace(/\s/g, '-').toLowerCase();
-const { addToWebpackConfig } = require('@dschau/gatsby-theme-utils');
-
-const { name } = require('./package.json');
-
-exports.onCreateWebpackConfig = addToWebpackConfig(name);
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;

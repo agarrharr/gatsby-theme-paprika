@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-paprika",
   "description": "A Gatsby theme that pulls in recipes from Paprika",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "license": "MIT",
   "repository": {
     "type": "git",
