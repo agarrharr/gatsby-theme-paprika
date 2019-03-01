@@ -6,14 +6,10 @@ A [Gatsby](https://www.gatsbyjs.org/) theme that pulls in your data from Paprika
 
 ## Using
 
-Create a new directory and install `gatsby`, `react`, `react-dom`, and `gatsby-theme-paprika`.
+Install the theme:
 
 ```sh
-$ mkdir my-recipes
-$ cd my-recipes
-$ git init
-$ npm init
-$ npm install gatsby react react-dom gatsby-theme-paprika
+npm install gatsby-theme-paprika gatsby react react-dom gatsby-plugin-compile-es6-packages
 ```
 
 Create `gatsby-config.js` with the following:
@@ -22,9 +18,17 @@ Create `gatsby-config.js` with the following:
 module.exports = {
   __experimentalThemes: [
     {
-      resolve: 'gatsby-theme-paprika',
+      resolve: `gatsby-theme-paprika`,
       options: {},
     },
+  ],
+  plugins: [
+    {
+      resolve: `gatsby-plugin-compile-es6-packages`,
+      options: {
+        modules: [`gatsby-theme-paprika`]
+      }
+    }
   ],
 };
 ```
