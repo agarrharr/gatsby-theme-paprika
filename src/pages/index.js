@@ -48,7 +48,7 @@ export default ({ data }) => {
         {data.allRecipesJson.edges.map(({ node }) => (
           <Link key={node.uid} to={`/${node.fields.slug}`}>
             <RecipeRow>
-              {images[node.uid].childImageSharp && (
+              {images[node.uid] && images[node.uid].childImageSharp && (
                 <Img
                   fixed={images[node.uid].childImageSharp.fixed}
                   alt={node.name}
