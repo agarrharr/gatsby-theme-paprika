@@ -2,7 +2,7 @@
 
 A [Gatsby](https://www.gatsbyjs.org/) theme that pulls in your data from Paprika and displays your recipes.
 
-[Demo](http://adam.garrett-harris.com/recipes/)
+[Demo](http://recipes.garrett-harris.com/)
 
 ![Screenshot](./gatsby-theme-paprika.png)
 
