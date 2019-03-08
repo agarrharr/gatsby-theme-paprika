@@ -1,6 +1,6 @@
 # gatsby-theme-paprika
 
-A [Gatsby](https://www.gatsbyjs.org/) theme that pulls in your data from Paprika and displays your recipes.
+A [Gatsby](https://www.gatsbyjs.org/) theme that pulls in your data from [Paprika](https://www.paprikaapp.com/) and displays your recipes.
 
 [Demo](http://recipes.garrett-harris.com/)
 
