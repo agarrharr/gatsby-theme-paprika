@@ -79,6 +79,8 @@ npm run build
 
 ## Deploy
 
+### Deploying to GitHub Pages
+
 To deploy to GitHub Pages you can do the following:
 
 ```sh
@@ -96,6 +98,35 @@ And deploy:
 ```
 npm run deploy
 ```
+
+### Deploying to Netlify
+
+Add this script to `package.json`:
+
+```
+"deploy": "npm run import && npm run build",
+```
+
+Build command: `npm run deploy`
+Publish directory: `public/`
+
+Add these environment variables:
+
+```
+PAPRIKA_PASSWORD
+PAPRIKA_USERNAME
+```
+
+#### Trigger a daily build from Zapier
+
+You can optionally, have Zapier (or IFTTT) trigger a new build daily so that your recipes are always being updated from your Paprika app to the web.
+
+1. Trigger: Schedule by Zapier
+    Every Day
+    Time of Day: 8am
+2. Action: Netlify
+    Start Deploy
+    Clear Build Cache: no
 
 ### Related
 
