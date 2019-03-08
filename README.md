@@ -4,6 +4,8 @@ A [Gatsby](https://www.gatsbyjs.org/) theme that pulls in your data from Paprika
 
 [Demo](http://adam.garrett-harris.com/recipes/)
 
+![Screenshot](./gatsby-theme-paprika.png)
+
 ## Using
 
 Install the theme:
