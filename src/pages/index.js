@@ -68,6 +68,14 @@ class Index extends React.Component {
       {}
     );
 
+    const recipes = data.allRecipesJson.edges
+      .map(({ node }) => node)
+      .filter(
+        recipe =>
+          searchText === '' ||
+          recipe.name.toUpperCase().includes(searchText.toUpperCase())
+      );
+
     return (
       <RecipesContainer>
         <div>
@@ -78,30 +86,28 @@ class Index extends React.Component {
             onChange={e => this.handleSearchTextChange(e.target.value)}
           />
         </div>
-        {data.allRecipesJson.edges
-          .filter(
-            ({ node }) =>
-              searchText === '' ||
-              node.name.toUpperCase().includes(searchText.toUpperCase())
-          )
-          .map(({ node }) => (
-            <Link key={node.uid} to={`/${node.fields.slug}`}>
+        {recipes.length ? (
+          recipes.map(recipe => (
+            <Link key={recipe.uid} to={`/${recipe.fields.slug}`}>
               <RecipeRow>
-                {images[node.uid] && images[node.uid].childImageSharp && (
+                {images[recipe.uid] && images[recipe.uid].childImageSharp && (
                   <Img
-                    fixed={images[node.uid].childImageSharp.fixed}
-                    alt={node.name}
+                    fixed={images[recipe.uid].childImageSharp.fixed}
+                    alt={recipe.name}
                     style={{ flexShrink: 0 }}
                   />
                 )}
                 <RecipeDetails>
-                  <div>{node.name}</div>
-                  <Rating rating={node.rating} />
-                  <RecipeSource>{node.source}</RecipeSource>
+                  <div>{recipe.name}</div>
+                  <Rating rating={recipe.rating} />
+                  <RecipeSource>{recipe.source}</RecipeSource>
                 </RecipeDetails>
               </RecipeRow>
             </Link>
-          ))}
+          ))
+        ) : (
+          <div>No recipes found</div>
+        )}
       </RecipesContainer>
     );
   }
