@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from '@emotion/styled';
 
+import Layout from '../components/layout';
 import Rating from '../components/rating';
 import * as COLORS from '../colors';
 
@@ -20,6 +21,9 @@ const Columns = styled.div`
 const Column = styled.div`
   flex-grow: 1;
   flex-basis: 0;
+  padding: 20px;
+  font-weight: 300;
+  line-height: 1.5em;
 
   @media (max-width: 600px) {
     & {
@@ -38,16 +42,23 @@ const ColumnTitle = styled.h3`
   }
 `;
 
+const SubTitle = styled.h4`
+  color: red;
+  font-weight: 400;
+`;
+
 const Ingredient = styled.div`
-  padding: 10px;
+  padding: 10px 0;
   color: ${({ done }) => (done ? COLORS.GREY : 'inherit')};
   text-decoration: ${({ done }) => (done ? 'line-through' : 'inherit')};
   cursor: pointer;
 `;
 
 const Direction = styled.div`
-  padding: 10px;
+  margin: 0 -10px;
+  padding: 10px 10px;
   background-color: ${({ active }) => (active ? COLORS.LIGHT_GREY : 'inherit')};
+  border-radius: 5px;
   cursor: pointer;
 `;
 
@@ -55,6 +66,7 @@ const RecipeHeader = styled.div`
   display: flex;
   width: 100%;
   margin-bottom: 10px;
+  padding: 10px;
 `;
 
 const Tabs = styled.div`
@@ -144,79 +156,91 @@ class Recipe extends React.Component {
   };
 
   render() {
-    console.log(this.state.completedIngredients);
     const recipe = this.props.data.recipesJson;
     const recipeImage = this.props.data.recipeImage;
 
     return (
-      <RecipeContainer>
-        <RecipeHeader>
-          {recipeImage && (
-            <Img fixed={recipeImage.childImageSharp.fixed} alt={recipe.name} />
-          )}
-          <RecipeDetails>
-            <RecipeTitle>{recipe.name}</RecipeTitle>
-            <Rating rating={recipe.rating} />
-            <RecipeCategories>
-              {recipe.categories.map((category, i) => (
-                <span key={category.uid}>
-                  {category.name}
-                  {i !== recipe.categories.length - 1 ? ', ' : null}
-                </span>
-              ))}
-            </RecipeCategories>
-            <a href={recipe.source_url}>
-              <span>{recipe.source}</span>
-            </a>
-          </RecipeDetails>
-        </RecipeHeader>
-        <Tabs>
-          <Tab
-            active={this.state.showIngredients}
-            onClick={() => this.handleSwitchTabs(true)}
-          >
-            Ingredients
-          </Tab>
-          <Tab
-            active={!this.state.showIngredients}
-            onClick={() => this.handleSwitchTabs(false)}
-          >
-            Directions
-          </Tab>
-        </Tabs>
-        <Columns>
-          <Column show={this.state.showIngredients}>
-            <ColumnTitle>Ingredients</ColumnTitle>
-            {recipe.ingredients.split('\n').map((ingredient, i) => (
-              <Ingredient
-                key={i}
-                done={this.state.completedIngredients.includes(i)}
-                onClick={() => this.handleIngredientClick(i)}
-              >
-                <b>{getIngredientNumber(ingredient)}</b>{' '}
-                {getIngredientWithoutNumber(ingredient)}
-              </Ingredient>
-            ))}
-          </Column>
-          <Column show={!this.state.showIngredients}>
-            <ColumnTitle>Directions</ColumnTitle>
-            <div>
-              {recipe.directions
-                .split('\n')
-                .filter(d => d !== '')
-                .map((direction, i) => (
-                  <Direction
-                    key={i}
-                    active={this.state.directionStep === i}
-                    onClick={() => this.handleDirectionClick(i)}
-                  >
-                    {direction}
-                  </Direction>
+      <Layout>
+        <RecipeContainer>
+          <RecipeHeader>
+            {recipeImage && (
+              <Img
+                fixed={recipeImage.childImageSharp.fixed}
+                alt={recipe.name}
+              />
+            )}
+            <RecipeDetails>
+              <RecipeTitle>{recipe.name}</RecipeTitle>
+              <Rating rating={recipe.rating} />
+              <RecipeCategories>
+                {recipe.categories.map((category, i) => (
+                  <span key={category.uid}>
+                    {category.name}
+                    {i !== recipe.categories.length - 1 ? ', ' : null}
+                  </span>
                 ))}
-            </div>
-          </Column>
-        </Columns>
-      </RecipeContainer>
+              </RecipeCategories>
+              <a href={recipe.source_url}>
+                <span>{recipe.source}</span>
+              </a>
+            </RecipeDetails>
+          </RecipeHeader>
+          <Tabs>
+            <Tab
+              active={this.state.showIngredients}
+              onClick={() => this.handleSwitchTabs(true)}
+            >
+              Ingredients
+            </Tab>
+            <Tab
+              active={!this.state.showIngredients}
+              onClick={() => this.handleSwitchTabs(false)}
+            >
+              Directions
+            </Tab>
+          </Tabs>
+          <Columns>
+            <Column show={this.state.showIngredients}>
+              <ColumnTitle>Ingredients</ColumnTitle>
+              {recipe.ingredients.split('\n').map((ingredient, i) => (
+                <Ingredient
+                  key={i}
+                  done={this.state.completedIngredients.includes(i)}
+                  onClick={() => this.handleIngredientClick(i)}
+                >
+                  <b>{getIngredientNumber(ingredient)}</b>{' '}
+                  {getIngredientWithoutNumber(ingredient)}
+                </Ingredient>
+              ))}
+              <div>
+                <SubTitle>Nutrition</SubTitle>
+                {recipe.nutritional_info}
+              </div>
+            </Column>
+            <Column show={!this.state.showIngredients}>
+              <ColumnTitle>Directions</ColumnTitle>
+              <div>
+                {recipe.directions
+                  .split('\n')
+                  .filter(d => d !== '')
+                  .map((direction, i) => (
+                    <Direction
+                      key={i}
+                      active={this.state.directionStep === i}
+                      onClick={() => this.handleDirectionClick(i)}
+                    >
+                      {direction}
+                    </Direction>
+                  ))}
+              </div>
+              <div>
+                <SubTitle>Notes</SubTitle>
+                {recipe.notes}
+              </div>
+            </Column>
+          </Columns>
+        </RecipeContainer>
+      </Layout>
     );
   }
 }
