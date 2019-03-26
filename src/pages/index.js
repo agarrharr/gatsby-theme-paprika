@@ -91,6 +91,7 @@ class Index extends React.Component {
                   <Img
                     fixed={images[node.uid].childImageSharp.fixed}
                     alt={node.name}
+                    style={{ flexShrink: 0 }}
                   />
                 )}
                 <RecipeDetails>
