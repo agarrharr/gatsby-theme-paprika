@@ -212,10 +212,12 @@ class Recipe extends React.Component {
                   {getIngredientWithoutNumber(ingredient)}
                 </Ingredient>
               ))}
-              <div>
-                <SubTitle>Nutrition</SubTitle>
-                {recipe.nutritional_info}
-              </div>
+              {recipe.nutritional_info && (
+                <div>
+                  <SubTitle>Nutrition</SubTitle>
+                  {recipe.nutritional_info}
+                </div>
+              )}
             </Column>
             <Column show={!this.state.showIngredients}>
               <ColumnTitle>Directions</ColumnTitle>
@@ -233,10 +235,12 @@ class Recipe extends React.Component {
                     </Direction>
                   ))}
               </div>
-              <div>
-                <SubTitle>Notes</SubTitle>
-                {recipe.notes}
-              </div>
+              {recipe.notes && (
+                <div>
+                  <SubTitle>Notes</SubTitle>
+                  {recipe.notes}
+                </div>
+              )}
             </Column>
           </Columns>
         </RecipeContainer>
