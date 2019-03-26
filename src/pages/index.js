@@ -6,6 +6,17 @@ import styled from '@emotion/styled';
 import Rating from '../components/rating';
 import * as COLORS from '../colors';
 
+const Input = styled.input`
+  height: 24px;
+  width: calc(100% - 12px);
+  margin-bottom: 10px;
+  padding: 6px;
+  font-size: 1em;
+  background-color: #eee;
+  border: none;
+  border-radius: 4px;
+`;
+
 const RecipesContainer = styled.div`
   font-family: sans-serif;
   a {
@@ -33,39 +44,69 @@ const RecipeSource = styled.small`
   font-weight: lighter;
 `;
 
-export default ({ data }) => {
-  const images = data.allFile.edges.reduce(
-    (accum, { node }) => ({
-      ...accum,
-      [node.relativePath.split('.')[0]]: node,
-    }),
-    {}
-  );
+class Index extends React.Component {
+  state = {
+    searchText: '',
+  };
 
-  return (
-    <div>
+  handleSearchTextChange = searchText => {
+    this.setState(state => ({
+      ...state,
+      searchText,
+    }));
+  };
+
+  render() {
+    const { searchText } = this.state;
+    const { data } = this.props;
+
+    const images = data.allFile.edges.reduce(
+      (accum, { node }) => ({
+        ...accum,
+        [node.relativePath.split('.')[0]]: node,
+      }),
+      {}
+    );
+
+    return (
       <RecipesContainer>
-        {data.allRecipesJson.edges.map(({ node }) => (
-          <Link key={node.uid} to={`/${node.fields.slug}`}>
-            <RecipeRow>
-              {images[node.uid] && images[node.uid].childImageSharp && (
-                <Img
-                  fixed={images[node.uid].childImageSharp.fixed}
-                  alt={node.name}
-                />
-              )}
-              <RecipeDetails>
-                <div>{node.name}</div>
-                <Rating rating={node.rating} />
-                <RecipeSource>{node.source}</RecipeSource>
-              </RecipeDetails>
-            </RecipeRow>
-          </Link>
-        ))}
+        <div>
+          <Input
+            type="text"
+            placeholder="Search"
+            value={searchText}
+            onChange={e => this.handleSearchTextChange(e.target.value)}
+          />
+        </div>
+        {data.allRecipesJson.edges
+          .filter(
+            ({ node }) =>
+              searchText === '' ||
+              node.name.toUpperCase().includes(searchText.toUpperCase())
+          )
+          .map(({ node }) => (
+            <Link key={node.uid} to={`/${node.fields.slug}`}>
+              <RecipeRow>
+                {images[node.uid] && images[node.uid].childImageSharp && (
+                  <Img
+                    fixed={images[node.uid].childImageSharp.fixed}
+                    alt={node.name}
+                  />
+                )}
+                <RecipeDetails>
+                  <div>{node.name}</div>
+                  <Rating rating={node.rating} />
+                  <RecipeSource>{node.source}</RecipeSource>
+                </RecipeDetails>
+              </RecipeRow>
+            </Link>
+          ))}
       </RecipesContainer>
-    </div>
-  );
-};
+    );
+  }
+}
+
+export default Index;
 
 export const query = graphql`
   query indexQuery {
