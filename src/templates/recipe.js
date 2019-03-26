@@ -64,6 +64,7 @@ const Direction = styled.div`
 
 const RecipeHeader = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   margin-bottom: 10px;
   padding: 10px;
@@ -101,8 +102,25 @@ const RecipeTitle = styled.h1`
 
 const RecipeDetails = styled.div`
   display: flex;
+  margin-bottom: 10px;
+`;
+
+const RecipeServings = styled.div`
+  font-weight: lighter;
+
+  span {
+    font-weight: 500;
+  }
+`;
+
+const RecipeMetaData = styled.div`
+  display: flex;
   flex-direction: column;
   padding-left: 10px;
+
+  & * {
+    margin: 4px 0;
+  }
 `;
 
 const RecipeCategories = styled.small`
@@ -163,27 +181,38 @@ class Recipe extends React.Component {
       <Layout>
         <RecipeContainer>
           <RecipeHeader>
-            {recipeImage && (
-              <Img
-                fixed={recipeImage.childImageSharp.fixed}
-                alt={recipe.name}
-              />
-            )}
+            <RecipeTitle>{recipe.name}</RecipeTitle>
             <RecipeDetails>
-              <RecipeTitle>{recipe.name}</RecipeTitle>
-              <Rating rating={recipe.rating} />
-              <RecipeCategories>
-                {recipe.categories.map((category, i) => (
-                  <span key={category.uid}>
-                    {category.name}
-                    {i !== recipe.categories.length - 1 ? ', ' : null}
-                  </span>
-                ))}
-              </RecipeCategories>
-              <a href={recipe.source_url}>
-                <span>{recipe.source}</span>
-              </a>
+              {recipeImage && (
+                <Img
+                  fixed={recipeImage.childImageSharp.fixed}
+                  alt={recipe.name}
+                />
+              )}
+              <RecipeMetaData>
+                <Rating rating={recipe.rating} />
+                <RecipeCategories>
+                  {recipe.categories.length ? (
+                    recipe.categories.map((category, i) => (
+                      <span key={category.uid}>
+                        {category.name}
+                        {i !== recipe.categories.length - 1 ? ', ' : null}
+                      </span>
+                    ))
+                  ) : (
+                    <span>Uncategorized</span>
+                  )}
+                </RecipeCategories>
+                <a href={recipe.source_url}>
+                  <span>{recipe.source}</span>
+                </a>
+              </RecipeMetaData>
             </RecipeDetails>
+            {recipe.servings && (
+              <RecipeServings>
+                <span>Servings</span> {recipe.servings}
+              </RecipeServings>
+            )}
           </RecipeHeader>
           <Tabs>
             <Tab
